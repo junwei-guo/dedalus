@@ -16,3 +16,4 @@
 /docs/_build/
 /dedalus.egg-info/
 /dedalus/examples.tar.gz
+/dedalus-env/
