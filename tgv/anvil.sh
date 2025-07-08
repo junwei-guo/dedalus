@@ -1,6 +1,10 @@
 #git config --global user.name "junwei-guo"
 #git config --global user.email guo_junwei@hotmail.com
 
+git clone --branch tgv --single-branch https://github.com/junwei-guo/dedalus.git
+cd dedalus
+
+
 
 module load  python/3.9.5 fftw/3.3.8   openmpi/4.0.6 
 echo $MPI_HOME
@@ -21,22 +25,22 @@ export FFTW_PREFIX=$FFTW_HOME
 #   Cannot find FFTW_PATH, FFTW_PREFIX, or libraries matching fftw.
 
 
-git clone --branch tgv --single-branch https://github.com/junwei-guo/dedalus.git
-
-
-
-cd dedalus
 
 rm -rf  dedalus-env
 python3 -m venv dedalus-env
 source dedalus-env/bin/activate
 python3 -m pip install numpy scipy sympy Cython mpi4py h5py     
+python3 -m pip install  docopt tblib coverage #pytest
 
+python3 -m pip install pytest==7.4.4 
+#pip install pytest==7.4.4 
 # petsc petsc4py docopt
 #pytest
 python3 setup.py build
 python3 setup.py install
 
 export OMP_NUM_THREADS=1
-python -c "import dedalus; print(dedalus.__version__)"
-mpirun -np 4 python -m dedalus test
+python3 -c "import dedalus; print(dedalus.__version__)"
+
+
+mpirun -np 4 python3 -m dedalus test
